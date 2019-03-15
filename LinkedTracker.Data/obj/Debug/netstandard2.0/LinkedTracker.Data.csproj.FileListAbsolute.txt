@@ -1,0 +1,9 @@
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.deps.json
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.dll
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.pdb
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.csprojAssemblyReference.cache
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.csproj.CoreCompileInputs.cache
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.AssemblyInfoInputs.cache
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.AssemblyInfo.cs
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.dll
+E:\Home\Documents\GitHub\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.pdb

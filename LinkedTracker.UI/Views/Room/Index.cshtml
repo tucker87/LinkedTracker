@@ -1,0 +1,22 @@
+@using Newtonsoft.Json;
+@model LinkedTracker.Models.RoomViewModel
+
+<div id="app">
+    <div>
+        <span>{{ Room.RoomName }}</span>
+    </div>
+    <div>
+        <input v-model="Room.Password"/>
+    </div>
+    <div>
+        <button @@click="setPassword">Set Password</button>
+    </div>
+</div>
+
+<script>
+    window.vm = @Html.Raw(JsonConvert.SerializeObject(Model));
+</script>
+@section Scripts
+{
+    <script src="~/js/room.js" asp-append-version="true"></script>
+}
