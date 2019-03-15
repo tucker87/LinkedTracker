@@ -18,25 +18,26 @@ namespace LinkedTracker.Controllers
             _roomRepository = roomRepository;
         }
 
-        [HttpGet("{game}/{roomName}")]
+        [HttpGet("/{game}/{roomName}")]
         public IActionResult Index(string game, string roomName)
         {
             var key = (game, roomName);
             var room = _roomRepository.GetOrCreate(key, () => new Room(key));
-            
+
             var viewModel = new RoomViewModel(room);
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody]string game, [FromBody]string roomName)
+        public IActionResult Create([FromBody](string game, string roomName) data)
         {
-            var data = (game, roomName);
             var exists = _roomRepository.Exists(data);
-            _roomRepository.Create(data, new Room(data));
+            if (exists)
+                return Json(new { created = false });
 
-            return Json(true);
+            _roomRepository.Create(data, new Room(data));
+            return Json(new { created = true });
         }
 
         [HttpPost]
@@ -48,9 +49,9 @@ namespace LinkedTracker.Controllers
             room.Password = password;
             _roomRepository.Update(key, room);
 
-            return View();
+            return Json(new {set = true});
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

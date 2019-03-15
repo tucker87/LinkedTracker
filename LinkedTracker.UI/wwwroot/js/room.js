@@ -3,7 +3,11 @@ new Vue({
     data: window.vm,
     methods: {
         setPassword() {
-            post(`/Room/SetPassword/${this.Room.Game}/${this.Room.RoomName}/${this.Room.Password}`)
+            post('/Room/SetPassword', { 
+                game: this.Room.Game,
+                roomName: this.Room.RoomName,
+                password: this.Room.Password
+            })
         }
     }
 })

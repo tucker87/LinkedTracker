@@ -9,16 +9,19 @@ new Vue({
         games:[{text: 'A Link to the Past', value: 'lttp'}],
         roomName: '',
         game: 'lttp',
-        roomUrl: null
+        roomUrl: null,
+        errorMessage: ''
     },
     methods: {
         async createRoom() {
             var response = await post('/Room/Create', { game: this.game, roomName: this.roomName })
             var data = await response.json();
-            debugger;
-            if(created) {
-                this.roomUrl = `/Room/${this.game}/${this.roomName}`
-            }
+            if(data.created)
+                this.errorMessage = ''                
+            else
+                this.errorMessage = 'Room name already exists.'
+
+            this.roomUrl = `/${this.game}/${this.roomName}`
         }
     }
 })

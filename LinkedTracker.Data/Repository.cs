@@ -39,7 +39,7 @@ namespace LinkedTracker.Data
         {
             var data = Get(key);
             if(data != null)
-                return default(TData);
+                return data;
 
             var newData = createFunc();
             Create(key, newData);

@@ -18,6 +18,9 @@
     <div>
         <a v-if="roomUrl != null" :href="roomUrl">Goto {{ roomUrl }}</a>
     </div>
+    <div>
+        <span style="color: red">{{ errorMessage }}</span>
+    </div>
 </div>
 
 @section Scripts
