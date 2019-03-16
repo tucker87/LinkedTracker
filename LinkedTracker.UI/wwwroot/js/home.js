@@ -1,9 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-
-new Vue({
+﻿new Vue({
     el: '#app',
     data:{
         games:[{text: 'A Link to the Past', value: 'lttp'}],
@@ -14,14 +9,18 @@ new Vue({
     },
     methods: {
         async createRoom() {
-            var response = await post('/Room/Create', { game: this.game, roomName: this.roomName })
+            var response = await post('/Room/Create', this.game)
             var data = await response.json();
-            if(data.created)
-                this.errorMessage = ''                
-            else
-                this.errorMessage = 'Room name already exists.'
+            this.game = data.game;
+            this.roomName = data.roomName;
 
-            this.roomUrl = `/${this.game}/${this.roomName}`
+            this.roomUrl = this.buildRoomUrl()
+        },
+        goRoom() {
+            window.location = this.buildRoomUrl()
+        },
+        buildRoomUrl() {
+            return `/${this.game}/${this.roomName}`
         }
     }
 })

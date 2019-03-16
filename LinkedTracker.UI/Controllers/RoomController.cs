@@ -30,14 +30,16 @@ namespace LinkedTracker.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody](string game, string roomName) data)
+        public IActionResult Create([FromBody]string game)
         {
+            var roomName = Utils.RandomString(5);
+            var data = (game, roomName);
             var exists = _roomRepository.Exists(data);
             if (exists)
                 return Json(new { created = false });
 
             _roomRepository.Create(data, new Room(data));
-            return Json(new { created = true });
+            return Json(new {data.game, data.roomName });
         }
 
         [HttpPost]
