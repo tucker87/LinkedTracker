@@ -34,6 +34,7 @@ namespace LinkedTracker
             });
 
             services.AddSingleton<IRoomRepository, RoomRepository>();
+            services.AddSingleton<IPointOfInterestRepository, PointOfInterestRepository>();
 
 
             services.AddMvc(options => {

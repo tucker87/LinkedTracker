@@ -1,4 +1,4 @@
-new Vue({
+window.app = new Vue({
     el: '#app',
     data: window.vm,
     methods: {
@@ -8,6 +8,9 @@ new Vue({
                 roomName: this.Room.RoomName,
                 password: this.Room.Password
             })
+        },
+        getPointsOfInterest() {
+            fetch(`/POI/${this.Room.Game}/${this.Room.PointOfInterestType}`)
         }
     }
 })

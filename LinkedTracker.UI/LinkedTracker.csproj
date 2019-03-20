@@ -9,6 +9,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All"/>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1"/>
     <PackageReference Include="M6T.Core.TupleModelBinder" Version="1.0.0"/>
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.0"/>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LinkedTracker.Data\LinkedTracker.Data.csproj"/>

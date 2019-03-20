@@ -179,30 +179,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jtgee\\.nuget\\packages\\": {},
+    "C:\\Users\\jtgee.DESKTOP-N1H22C4\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Home\\Documents\\GitHub\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
+      "projectUniqueName": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
       "projectName": "LinkedTracker.Data",
-      "projectPath": "E:\\Home\\Documents\\GitHub\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
-      "packagesPath": "C:\\Users\\jtgee\\.nuget\\packages\\",
-      "outputPath": "E:\\Home\\Documents\\GitHub\\LinkedTracker\\LinkedTracker.Data\\obj\\",
+      "projectPath": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
+      "packagesPath": "C:\\Users\\jtgee.DESKTOP-N1H22C4\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\jtgee\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\jtgee.DESKTOP-N1H22C4\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

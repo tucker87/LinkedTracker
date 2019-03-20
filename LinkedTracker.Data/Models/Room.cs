@@ -9,4 +9,5 @@ public class Room
         public string Game { get; set; }
         public string RoomName { get; set; }
         public string Password { get; set;}
+        public string PointOfInterestType { get; set; }
 }

@@ -11,6 +11,12 @@
     <div>
         <button @@click="setPassword">Set Password</button>
     </div>
+    <div>
+        <label>Point of Interest Type</label>
+        <select v-model="Room.PointOfInterestType">
+            <option value="Randomizer">Randomizer</option>
+        </select>
+    </div>
     <partial name="_@Model.Room.Game"></partial>
 </div>
 
