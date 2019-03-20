@@ -13,17 +13,28 @@
     </div>
     <div>
         <label>Point of Interest Type</label>
-        <select v-model="Room.PointOfInterestType">
+        <select @@change="getPointsOfInterest" v-model="Room.PointOfInterestType">
             <option value="Randomizer">Randomizer</option>
         </select>
     </div>
-    <partial name="_@Model.Room.Game"></partial>
+    <game-map :points="PointsOfInterest" :img-src="imgSrc"></game-map>
 </div>
 
-<script>
-    window.vm = @Html.Raw(JsonConvert.SerializeObject(Model));
-</script>
+<style>
+    .map-wrapper {
+        position: relative;
+    }
+
+    .map {
+        width: 100%;
+    }
+</style>
+
 @section Scripts
 {
-    <script src="~/js/room.js" asp-append-version="true"></script>
+    <script>
+        window.vm = @Html.Raw(JsonConvert.SerializeObject(Model));
+    </script>
+    
+    <script src="~/dist/bundle.js" asp-append-version="true"></script>
 }

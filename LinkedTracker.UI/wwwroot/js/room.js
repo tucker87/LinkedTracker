@@ -1,6 +1,17 @@
+// import poi from '../dist/js/PointOfInterest/POI.js'
+//import Vue from 'vue'
+import 'babel-polyfill';
+import gameMap from '../../Components/GameMap.vue'
+
 window.app = new Vue({
     el: '#app',
-    data: window.vm,
+    data: {
+        imgSrc: '/img/map2.png',
+        ...window.vm
+    },
+    components: {
+        gameMap
+	},
     methods: {
         setPassword() {
             post('/Room/SetPassword', { 
@@ -9,8 +20,9 @@ window.app = new Vue({
                 password: this.Room.Password
             })
         },
-        getPointsOfInterest() {
-            fetch(`/POI/${this.Room.Game}/${this.Room.PointOfInterestType}`)
+        async getPointsOfInterest() {
+            var response = await fetch(`/POI/${this.Room.Game}/${this.Room.PointOfInterestType}`)
+            this.PointsOfInterest = await response.json()
         }
     }
 })

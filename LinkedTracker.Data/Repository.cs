@@ -17,6 +17,7 @@ namespace LinkedTracker.Data
     public class Repository<TKey, TData>
     {
         public Dictionary<TKey, TData> Data { get; set; } = new Dictionary<TKey, TData>();
+        private int _nextIndex;
 
         public bool Exists(TKey key)
         {
@@ -25,6 +26,9 @@ namespace LinkedTracker.Data
 
         public void Create(TKey key, TData data)
         {
+            if(data is IIndexed indexed)
+                indexed.Index = _nextIndex++;
+
             Data.Add(key, data);
         }
 

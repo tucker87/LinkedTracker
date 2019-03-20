@@ -19,7 +19,7 @@ namespace LinkedTracker.Controllers
         }
 
         [HttpGet("/{game}/{roomName}")]
-        public IActionResult Index(string game, string roomName)
+        public IActionResult ViewRoom(string game, string roomName)
         {
             var key = (game, roomName);
             var room = _roomRepository.GetOrCreate(key, () => new Room(key));
