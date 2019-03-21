@@ -1,21 +1,17 @@
 <template>
     <div :class="['poi', {'done': point.isDone}]" 
     :style="{
-        top: calcTop(point.x),
-        left: calcLeft(point.y)
+        top: calcPos(point.x, mapXScale),
+        left: calcPos(point.y, mapYScale)
     }"></div>
 </template>
 
 <script>
     module.exports = {
-        props: ['point'],
+        props: ['point', 'mapXScale', 'mapYScale'],
         methods: {
-            calcTop(x) {
-                console.log(document.getElementsByClassName('map')[0])
-                return x + 'px';
-            },
-            calcLeft(y) {
-                return y + 'px';
+            calcPos(x, scale) {
+                return x + (x * scale) + 'px';
             }
         }
     }

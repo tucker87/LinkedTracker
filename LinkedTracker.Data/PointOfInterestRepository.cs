@@ -14,7 +14,9 @@ public class PointOfInterestRepository : Repository<(string, string), List<Point
         {
             [("lttp", "Randomizer")] = new List<PointOfInterest>{
                 new PointOfInterest(0, 0),
-                new PointOfInterest(100, 100)
+                new PointOfInterest(100, 100),
+                new PointOfInterest(200, 200),
+                new PointOfInterest(200, 800),
             }
         };
     }
