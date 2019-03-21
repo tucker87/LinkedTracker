@@ -14,9 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\LinkedTracker.Data\LinkedTracker.Data.csproj"/>
   </ItemGroup>
-  <!-- <Target Name="PrepublishScript" BeforeTargets="Build">
+  <Target Name="PrepublishScript" BeforeTargets="Build">
     <Exec Command="npm install" />
     <Exec Command="gulp" />
-  </Target> -->
+  </Target>
 
 </Project>
