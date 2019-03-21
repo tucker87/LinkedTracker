@@ -24,6 +24,8 @@
         width: 20px;
         background-color: green;
         border: black solid 3px;
+        margin-top: -10px;
+        margin-left: -10px;
     }
     .done {
         background-color: gray;
