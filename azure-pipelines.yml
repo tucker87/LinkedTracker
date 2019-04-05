@@ -23,18 +23,13 @@ steps:
     echo $(System.DefaultWorkingDirectory)
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)'
-    contents: 'LinkedTracker.UI/dist/**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/LinkedTracker.UI/dist/'
+    includeRootFolder: false
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip' 
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutputs
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/LinkedTracker.UI/dist/'
-    artifactName: AllTheThings
