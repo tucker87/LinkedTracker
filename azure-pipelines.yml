@@ -23,6 +23,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
     contents: '**\dist\**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
