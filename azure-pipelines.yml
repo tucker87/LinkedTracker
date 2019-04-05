@@ -24,7 +24,7 @@ steps:
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    contents: 'dist\**'
+    contents: 'LinkedTracker.UI\dist\**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
