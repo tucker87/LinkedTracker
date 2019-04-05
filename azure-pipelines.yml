@@ -19,12 +19,14 @@ steps:
     cd LinkedTracker.UI
     npm install
     npm run build
+    dir
+    echo $(System.DefaultWorkingDirectory)
   displayName: 'npm install and build'
 
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
-    contents: 'LinkedTracker.UI\dist\**'
+    contents: 'LinkedTracker.UI/dist/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
@@ -34,5 +36,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)\LinkedTracker\LinkedTracker.UI\'
+    PathtoPublish: '$(System.DefaultWorkingDirectory)/LinkedTracker.UI/'
     artifactName: AllTheThings
