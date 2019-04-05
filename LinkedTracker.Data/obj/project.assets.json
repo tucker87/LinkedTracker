@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
+      "projectUniqueName": "C:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
       "projectName": "LinkedTracker.Data",
-      "projectPath": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
+      "projectPath": "C:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\LinkedTracker.Data.csproj",
       "packagesPath": "C:\\Users\\jtgee.DESKTOP-N1H22C4\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\obj\\",
+      "outputPath": "C:\\Users\\jtgee.DESKTOP-N1H22C4\\Documents\\Github\\LinkedTracker\\LinkedTracker.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

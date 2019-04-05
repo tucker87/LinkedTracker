@@ -16,3 +16,12 @@ C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker\LinkedTracker.Data
 C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.AssemblyInfo.cs
 C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.dll
 C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.pdb
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.deps.json
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.dll
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\bin\Debug\netstandard2.0\LinkedTracker.Data.pdb
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.csprojAssemblyReference.cache
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.csproj.CoreCompileInputs.cache
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.AssemblyInfoInputs.cache
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.AssemblyInfo.cs
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.dll
+C:\Users\jtgee.DESKTOP-N1H22C4\Documents\Github\LinkedTracker2\LinkedTracker.Data\obj\Debug\netstandard2.0\LinkedTracker.Data.pdb

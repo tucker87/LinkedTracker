@@ -7,9 +7,30 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/LinkedTracker.UI/LinkedTracker.csproj"
+                "${workspaceFolder}/LinkedTracker.Api/LinkedTracker.Api.csproj"
             ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/LinkedTracker.Api/LinkedTracker.Api.csproj"
+            ],
+            "problemMatcher": "$tsc"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/LinkedTracker.Api/LinkedTracker.Api.csproj"
+            ],
+            "problemMatcher": "$tsc"
         }
     ]
 }
