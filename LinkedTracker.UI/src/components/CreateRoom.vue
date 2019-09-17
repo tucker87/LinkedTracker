@@ -52,7 +52,7 @@ export default {
       this.game = data.game;
       this.roomName = data.roomName;
 
-      this.roomUrl = this.buildRoomUrl();
+      // this.roomUrl = this.buildRoomUrl();
     }
   }
 };

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LinkedTracker.Data;
+using LinkedTracker.Hubs;
 using M6T.Core.TupleModelBinder;
 using Microsoft.AspNet.OData.Extensions;
 using Microsoft.AspNet.OData.Formatter;
@@ -36,9 +37,10 @@ namespace LinkedTracker.Api
             options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:8080")
+                    builder.WithOrigins("http://localhost:8088")
                         .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
 
@@ -70,6 +72,8 @@ namespace LinkedTracker.Api
 
             services.AddSingleton<IRoomRepository, RoomRepository>();
             services.AddSingleton<IPointOfInterestRepository, PointOfInterestRepository>();
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,6 +102,10 @@ namespace LinkedTracker.Api
             app.UseMvc(routeBuilder => {
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().Count().OrderBy().Filter();
+            });
+
+            app.UseSignalR(r => {
+                r.MapHub<RoomHub>("/room-hub");
             });
         }
     }

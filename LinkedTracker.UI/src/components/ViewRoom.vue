@@ -11,7 +11,7 @@
     </div>
     <div>
       <label>Point of Interest Type</label>
-      <select @change="getPointsOfInterest" v-model="room.pointOfInterestType">
+      <select @change="setPointsOfInterest" v-model="room.pointOfInterestType">
         <option value="Randomizer">Randomizer</option>
       </select>
     </div>
@@ -32,6 +32,9 @@ export default {
       pointsOfInterest: []
     }
   },
+  created() {
+    this.$roomHub.$on('poi-type-changed', this.onPoiTypeChanged)
+  },
   mounted() {
     api.getRoom(this.game, this.roomName)
       .then(response => {
@@ -49,6 +52,18 @@ export default {
         roomName: this.room.roomName,
         password: this.room.password
       })
+    },
+    async setPointsOfInterest() {
+      await api.setPOIs({
+        game: this.room.game,
+        roomName: this.room.roomName,
+        poiType: this.room.pointOfInterestType
+      })
+    },
+    async onPoiTypeChanged(e) {
+      this.room.pointOfInterestType = e.poiType
+
+      await this.getPointsOfInterest()
     },
     async getPointsOfInterest() {
       var points = await api.getPOIs(this.room.game, this.room.pointOfInterestType)
