@@ -33,6 +33,7 @@ export default {
     }
   },
   created() {
+    console.log(process.env)
     this.$roomHub.$on('poi-type-changed', this.onPoiTypeChanged)
   },
   mounted() {
