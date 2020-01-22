@@ -63,6 +63,7 @@ export default {
 <style scoped>
 .map-wrapper {
   position: relative;
+  user-select: none;
 }
 
 #map {
