@@ -15,6 +15,10 @@ export default {
             roomHub.$emit('poi-type-changed', {game, room, poiType});
         })
 
+        connection.on('PoiDoneChange', (poiIndex, isDone) => {
+            roomHub.$emit('poi-done-changed', {poiIndex, isDone});
+        })
+
         let startedPromise = null
         function start() {
             startedPromise = connection.start().catch(err => {
@@ -28,9 +32,15 @@ export default {
 
         start()
 
-        roomHub.test = str => {
+        roomHub.setPoiDone = (game, roomName, poiIndex, isDone) => {
             startedPromise
-                .then(() => connection.invoke('Test', str))
+                .then(() => connection.invoke('SetPoiDone', game, roomName, poiIndex, isDone))
+                .catch(console.error)
+        }
+
+        roomHub.joinRoom = (game, roomName) => {
+            startedPromise
+                .then(() => connection.invoke('JoinRoom', game, roomName))
                 .catch(console.error)
         }
     }

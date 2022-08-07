@@ -1,16 +1,14 @@
 using System.Collections.Generic;
-using LinkedTracker.Data;
+using LinkedTracker.Data.Models;
 
-namespace LinkedTracker.Models
+namespace LinkedTracker.Api.Models;
+
+public class RoomViewModel
 {
-    public class RoomViewModel
+    public RoomViewModel(Room room)
     {
-        public RoomViewModel(Room room)
-        {
-            Room = room;
-        }
-
-        public Room Room { get; set; }
-        public List<PointOfInterest> PointsOfInterest { get; set; } = new List<PointOfInterest>();
+        Room = room;
     }
+
+    public Room Room { get; set; }
 }

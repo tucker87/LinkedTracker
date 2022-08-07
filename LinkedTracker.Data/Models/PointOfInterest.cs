@@ -1,3 +1,5 @@
+namespace LinkedTracker.Data.Models;
+
 public class PointOfInterest : IIndexed
 {
     public PointOfInterest(int x, int y)

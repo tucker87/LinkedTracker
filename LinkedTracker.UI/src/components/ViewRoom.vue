@@ -15,7 +15,7 @@
         <option value="Randomizer">Randomizer</option>
       </select>
     </div>
-    <game-map :points="pointsOfInterest" :img-src="imgSrc"></game-map>
+    <game-map :points="pointsOfInterest" :img-src="imgSrc" :game="game" :roomName="roomName"></game-map>
   </div>
 </template>
 
@@ -35,13 +35,16 @@ export default {
   created() {
     console.log(process.env)
     this.$roomHub.$on('poi-type-changed', this.onPoiTypeChanged)
+    this.$roomHub.$on('poi-done-changed', this.onPoiDoneChanged)
   },
   mounted() {
     api.getRoom(this.game, this.roomName)
       .then(response => {
         this.room = response.room
-        this.pointsOfInterest = response.pointsOfInterest
+        this.pointsOfInterest = response.room.pointsOfInterest
       })
+    
+    this.$roomHub.joinRoom(this.game, this.roomName)
   },
   components: {
     gameMap
@@ -66,8 +69,11 @@ export default {
 
       await this.getPointsOfInterest()
     },
+    onPoiDoneChanged(e) {
+      this.pointsOfInterest[e.poiIndex].isDone = e.isDone
+    },
     async getPointsOfInterest() {
-      var points = await api.getPOIs(this.room.game, this.room.pointOfInterestType)
+      var points = await api.getPOIs(this.room.game, this.roomName)
       this.pointsOfInterest = points
     }
   }

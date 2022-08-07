@@ -1,24 +1,17 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using LinkedTracker.Models;
+using LinkedTracker.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LinkedTracker.Controllers
+namespace LinkedTracker.Api.Controllers;
+
+[Route("poi")]
+public class PointOfInterestController : Controller 
 {
-    [Route("poi")]
-    public class PointOfInterestController : Controller 
+    private readonly IPointOfInterestRepository _poiRepository;
+
+    public PointOfInterestController(IPointOfInterestRepository poiRepository)
     {
-        private readonly IPointOfInterestRepository _poiRepository;
-
-        public PointOfInterestController(IPointOfInterestRepository poiRepository)
-        {
-            _poiRepository = poiRepository;
-        }
-
-        [HttpGet("{game}/{pointOfInterestType}")]
-        public IActionResult GetPointsOfInterest(string game, string pointOfInterestType)
-        {
-            return Json(_poiRepository.Get((game, pointOfInterestType)));
-        }
+        _poiRepository = poiRepository;
     }
+
+    
 }

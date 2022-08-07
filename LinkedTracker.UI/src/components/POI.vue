@@ -17,7 +17,7 @@ export default {
       return x + x * scale + "px";
     },
     toggleDone() {
-      this.point.isDone = !this.point.isDone
+      this.$emit('toggleDone', this.point)
     }
   }
 };

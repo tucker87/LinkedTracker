@@ -13,8 +13,8 @@ export default {
         axios.get(`/Room/${game}/${roomName}`)
             .then(r => r.data),
 
-    getPOIs: (game, pointOfInterestType) => 
-        axios.get(`/POI/${game}/${pointOfInterestType}`)
+    getPOIs: (game, roomName) => 
+        axios.get(`/Room/GetPointsOfInterest/${game}/${roomName}`)
             .then(r => r.data),
     
     setPOIs: request => 

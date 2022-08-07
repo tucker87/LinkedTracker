@@ -7,6 +7,7 @@
       :point="point"
       :map-x-scale="calcXScale()"
       :map-y-scale="calcYScale()"
+      @toggleDone="toggleDone"
     ></poi>
   </div>
 </template>
@@ -16,7 +17,7 @@ import poi from "./POI.vue";
 const pDiff = (a, b) => Math.abs(a - b) / a;
 export default {
   components: { poi },
-  props: ["points", "imgSrc"],
+  props: ["points", "imgSrc", "game", "roomName"],
   data: function() {
     return {
       srcHeight: 0,
@@ -55,6 +56,10 @@ export default {
     },
     calcYScale() {
       return pDiff(this.srcWidth, this.currWidth);
+    },
+    toggleDone(e) {
+      e.isDone = !e.isDone
+      this.$roomHub.setPoiDone(this.game, this.roomName, e.index, e.isDone)
     }
   }
 };
@@ -64,6 +69,7 @@ export default {
 .map-wrapper {
   position: relative;
   user-select: none;
+  min-width: 900px;
 }
 
 #map {
