@@ -34,8 +34,8 @@ export default {
   },
   created() {
     console.log(process.env)
-    this.$roomHub.$on('poi-type-changed', this.onPoiTypeChanged)
-    this.$roomHub.$on('poi-done-changed', this.onPoiDoneChanged)
+    this.$roomHub.on('poi-type-changed', this.onPoiTypeChanged)
+    this.$roomHub.on('poi-done-changed', this.onPoiDoneChanged)
   },
   mounted() {
     api.getRoom(this.game, this.roomName)

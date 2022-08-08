@@ -1,10 +1,12 @@
-import { HubConnectionBuilder, LogLevel } from '@aspnet/signalr'
+import { HubConnectionBuilder, LogLevel } from '@microsoft/signalr'
 import api from './api'
+import mitt from 'mitt';
 
 export default {
-    install(Vue) {
-        const roomHub = new Vue()
-        Vue.prototype.$roomHub = roomHub
+    install(app) {
+        console.log('in roomhub', app)
+        const roomHub = mitt()
+        app.config.globalProperties.$roomHub = roomHub
        
         const connection = new HubConnectionBuilder()
             .withUrl(`${api.baseURL}/room-hub`)
@@ -12,11 +14,11 @@ export default {
             .build()
 
         connection.on('PoiTypeChange', (game, room, poiType) => {
-            roomHub.$emit('poi-type-changed', {game, room, poiType});
+            roomHub.emit('poi-type-changed', {game, room, poiType});
         })
 
         connection.on('PoiDoneChange', (poiIndex, isDone) => {
-            roomHub.$emit('poi-done-changed', {poiIndex, isDone});
+            roomHub.emit('poi-done-changed', {poiIndex, isDone});
         })
 
         let startedPromise = null

@@ -1,14 +1,12 @@
-import Vue from 'vue'
+import { createApp, h } from 'vue'
 import App from './App.vue'
 import router from './router'
 import RoomHub from './room-hub'
 
+window.app = createApp({
+  render: () => h(App),
+})
 
-Vue.config.productionTip = false
-
-Vue.use(RoomHub)
-
-window.app = new Vue({
-  router,
-  render: h => h(App),
-}).$mount('#app')
+window.app.use(router)
+window.app.use(RoomHub)
+window.app.mount('#app')
