@@ -15,7 +15,7 @@
         <option value="Randomizer">Randomizer</option>
       </select>
     </div>
-    <game-map :points="pointsOfInterest" :img-src="imgSrc" :game="game" :roomName="roomName"></game-map>
+    <game-map :points="pointsOfInterest" :img-src="imgSrc" :game="game" :roomName="roomName" @createPoint="createPoint"></game-map>
   </div>
 </template>
 
@@ -75,6 +75,9 @@ export default {
     async getPointsOfInterest() {
       var points = await api.getPOIs(this.room.game, this.roomName)
       this.pointsOfInterest = points
+    },
+    createPoint(p) {
+      this.pointsOfInterest.push(p)
     }
   }
 };

@@ -22,7 +22,7 @@ public class RoomHub : Hub<IRoomHub>
     public async Task SetPoiDone(string game, string roomName, int poiIndex, bool isDone)
     {
         var room = _roomRepository.Get((game, roomName));
-        room.PointsOfInterest[poiIndex].IsDone = isDone;
+        room.PointsOfInterest[poiIndex].Areas.ForEach(a => a.Chests.ForEach(c => c.IsDone = isDone));
         _roomRepository.Update((game, roomName), room);
         await Clients.Group($"{game}{roomName}").PoiDoneChange(poiIndex, isDone);
     }

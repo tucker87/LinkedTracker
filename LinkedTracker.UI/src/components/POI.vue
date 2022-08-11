@@ -3,8 +3,8 @@
     @click="toggleDone"
     :class="['poi', {'done': point.isDone}]"
     :style="{
-        top: calcPos(point.x, mapXScale),
-        left: calcPos(point.y, mapYScale)
+        top: calcPos(point.y, mapYScale),
+        left: calcPos(point.x, mapXScale)
     }"
   ></div>
 </template>
@@ -14,7 +14,7 @@ export default {
   props: ["point", "mapXScale", "mapYScale"],
   methods: {
     calcPos(x, scale) {
-      return x + x * scale + "px";
+      return x * scale + "px";
     },
     toggleDone() {
       this.$emit('toggleDone', this.point)

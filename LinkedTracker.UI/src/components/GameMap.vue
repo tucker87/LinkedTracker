@@ -1,6 +1,6 @@
 <template>
   <div class="map-wrapper">
-    <img id="map" :src="imgSrc">
+    <img id="map" :src="imgSrc" @click="createPoint">
     <poi
       v-for="point in points"
       :key="point.Index"
@@ -14,7 +14,7 @@
 
 <script>
 import poi from "./POI.vue";
-const pDiff = (a, b) => Math.abs(a - b) / a;
+const pDiff = (a, b) => b / a;
 export default {
   components: { poi },
   props: ["points", "imgSrc", "game", "roomName"],
@@ -60,6 +60,17 @@ export default {
     toggleDone(e) {
       e.isDone = !e.isDone
       this.$roomHub.setPoiDone(this.game, this.roomName, e.index, e.isDone)
+    },
+    createPoint(e) {
+      let x = e.offsetX
+      let y = e.offsetY
+      
+      let point = {
+        x: x / this.calcXScale(),
+        y: y / this.calcYScale()
+      }
+      
+      this.$emit('createPoint', point)
     }
   }
 };
