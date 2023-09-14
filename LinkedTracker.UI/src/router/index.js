@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import CreateRoom from '@/components/CreateRoom'
-import ViewRoom from '@/components/ViewRoom'
+import CreateRoom from '@/components/CreateRoom.vue'
+import ViewRoom from '@/components/ViewRoom.vue'
 
 const routes = [
     {
@@ -12,20 +12,18 @@ const routes = [
     {
         path: '/CreateRoom',
         name: 'CreateRoom',
-        // component: () => import('../components/CreateRoom.vue')
         component: CreateRoom
     },
     {
         path: '/ViewRoom/:game/:roomName',
         name: 'ViewRoom',
-        // component: () => import('../components/ViewRoom.vue'),
         component: ViewRoom,
         props: true
     }
 ]
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes
 })
 

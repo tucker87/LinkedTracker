@@ -33,7 +33,7 @@ export default {
     }
   },
   created() {
-    console.log(process.env)
+    console.log(import.meta.env)
     this.$roomHub.on('poi-type-changed', this.onPoiTypeChanged)
     this.$roomHub.on('poi-done-changed', this.onPoiDoneChanged)
   },

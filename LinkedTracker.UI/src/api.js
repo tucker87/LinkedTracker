@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = process.env.VUE_APP_API_BASE_URL
+const baseUrl = import.meta.env.VITE_API_BASE_URL
 
 axios.defaults.baseURL = baseUrl;
 
