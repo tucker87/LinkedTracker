@@ -1,17 +1,10 @@
-using LinkedTracker.Data;
+using LinkedTracker.Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LinkedTracker.Api.Controllers;
 
 [Route("poi")]
-public class PointOfInterestController : Controller 
+public class PointOfInterestController(PointOfInterestRepository poiRepository) : Controller 
 {
-    private readonly PointOfInterestRepository _poiRepository;
-
-    public PointOfInterestController(PointOfInterestRepository poiRepository)
-    {
-        _poiRepository = poiRepository;
-    }
-
-    
+    private readonly PointOfInterestRepository _poiRepository = poiRepository;
 }

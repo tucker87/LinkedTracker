@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using LinkedTracker.Data;
+using LinkedTracker.Data.Repositories;
 using Microsoft.AspNetCore.SignalR;
 
 namespace LinkedTracker.Api.Hubs;
@@ -10,15 +10,10 @@ public interface IRoomHub
     Task PoiDoneChange(int poiIndex, bool isDone);
 }
 
-public class RoomHub : Hub<IRoomHub>
+public class RoomHub(RoomRepository roomRepository) : Hub<IRoomHub>
 {
-    private readonly RoomRepository _roomRepository;
+    private readonly RoomRepository _roomRepository = roomRepository;
 
-    public RoomHub(RoomRepository roomRepository)
-    {
-        _roomRepository = roomRepository;
-    }
-    
     public async Task SetPoiDone(string game, string roomName, int poiIndex, bool isDone)
     {
         var room = _roomRepository.Get((game, roomName));

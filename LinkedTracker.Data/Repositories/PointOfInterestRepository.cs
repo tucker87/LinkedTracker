@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LinkedTracker.Data.Models;
 
-namespace LinkedTracker.Data;
+namespace LinkedTracker.Data.Repositories;
 
 public class PointOfInterestRepository
 {

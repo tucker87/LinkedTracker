@@ -4,6 +4,8 @@ using LinkedTracker.Api.Hubs;
 using LinkedTracker.Api.Models;
 using LinkedTracker.Data;
 using LinkedTracker.Data.Models;
+using LinkedTracker.Data.Repositories;
+using LinkedTracker.Data.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;

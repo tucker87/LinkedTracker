@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using LinkedTracker.Data.Models;
 
+namespace LinkedTracker.Data.Repositories;
+
 public class ItemRepository 
 {
     private Dictionary<(string, string), Func<List<Item>>> _itemGenerators;

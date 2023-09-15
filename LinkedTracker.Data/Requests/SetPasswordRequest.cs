@@ -1,4 +1,4 @@
-﻿namespace LinkedTracker.Data;
+﻿namespace LinkedTracker.Data.Requests;
 
 public class SetPasswordRequest
 {
