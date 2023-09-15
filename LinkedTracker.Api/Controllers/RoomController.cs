@@ -11,20 +11,14 @@ using Microsoft.AspNetCore.SignalR;
 namespace LinkedTracker.Api.Controllers;
 
 [Route("[controller]")]
-public class RoomController : Controller
+public class RoomController(
+    RoomRepository roomRepository,
+    PointOfInterestRepository pointOfInterestRepository,
+    IHubContext<RoomHub, IRoomHub> roomHub) : Controller
 {
-    private readonly IRoomRepository _roomRepository;
-    private readonly IPointOfInterestRepository _pointOfInterestRepository;
-    private readonly IHubContext<RoomHub, IRoomHub> _roomHub;
-
-    public RoomController(IRoomRepository roomRepository, 
-        IPointOfInterestRepository pointOfInterestRepository, 
-        IHubContext<RoomHub, IRoomHub> roomHub)
-    {
-        _roomRepository = roomRepository;
-        _pointOfInterestRepository = pointOfInterestRepository;
-        _roomHub = roomHub;
-    }
+    private readonly RoomRepository _roomRepository = roomRepository;
+    private readonly PointOfInterestRepository _pointOfInterestRepository = pointOfInterestRepository;
+    private readonly IHubContext<RoomHub, IRoomHub> _roomHub = roomHub;
 
     [HttpGet("{game}/{roomName}")]
     public IActionResult ViewRoom(string game, string roomName)
@@ -72,7 +66,7 @@ public class RoomController : Controller
         room.PointsOfInterest = _pointOfInterestRepository.Get((game, poiType)).ToList();
         _roomRepository.Update(key, room);
 
-        await _roomHub.Clients.Group($"{game}{roomName}").PoiTypeChange(game, roomName, poiType);
+        await _roomHub.Clients.Group(game+roomName).PoiTypeChange(game, roomName, poiType);
 
         return Results.Ok();
     }

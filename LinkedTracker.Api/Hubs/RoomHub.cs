@@ -12,9 +12,9 @@ public interface IRoomHub
 
 public class RoomHub : Hub<IRoomHub>
 {
-    private readonly IRoomRepository _roomRepository;
+    private readonly RoomRepository _roomRepository;
 
-    public RoomHub(IRoomRepository roomRepository)
+    public RoomHub(RoomRepository roomRepository)
     {
         _roomRepository = roomRepository;
     }

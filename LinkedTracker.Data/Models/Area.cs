@@ -3,14 +3,9 @@ using System.Linq;
 
 namespace LinkedTracker.Data.Models;
 
-public class Area
+public class Area(string name)
 {
-    public Area(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; set; }
+    public string Name { get; set; } = name;
     public List<Chest> Chests { get; set; } = new() { new() };
     public List<ItemType> RequiredItems { get; set; } = new();
     public bool IsLocked(List<ItemType> items) => RequiredItems.All(items.Contains);

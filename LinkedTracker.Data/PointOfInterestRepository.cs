@@ -5,12 +5,7 @@ using LinkedTracker.Data.Models;
 
 namespace LinkedTracker.Data;
 
-public interface IPointOfInterestRepository
-{
-    IEnumerable<PointOfInterest> Get((string game, string poiType) key);
-}
-
-public class PointOfInterestRepository : IPointOfInterestRepository
+public class PointOfInterestRepository
 {
     private readonly Dictionary<(string, string), Func<List<PointOfInterest>>> _poiGenerators;
     

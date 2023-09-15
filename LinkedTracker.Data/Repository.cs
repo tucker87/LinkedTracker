@@ -5,16 +5,6 @@ using LinkedTracker.Data.Models;
 
 namespace LinkedTracker.Data;
 
-public interface IRepository<TKey, TData>
-{
-    Dictionary<TKey, TData> Data { get; set; }
-    bool Exists(TKey key);
-    void Create(TKey key, TData data);
-    TData Get(TKey key);
-    TData GetOrCreate(TKey key, Func<TData> createFunc);
-    void Update(TKey key, TData data);
-}
-
 public class Repository<TKey, TData>
 {
     public Dictionary<TKey, TData> Data { get; set; } = new Dictionary<TKey, TData>();
@@ -37,7 +27,7 @@ public class Repository<TKey, TData>
     {
         return Data.ContainsKey(key)
             ? Data[key]
-            : default(TData);
+            : default;
     }
 
     public TData GetOrCreate(TKey key, Func<TData> createFunc)

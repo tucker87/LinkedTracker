@@ -1,14 +1,10 @@
-﻿using System.Linq;
-using LinkedTracker.Api.Hubs;
+﻿using LinkedTracker.Api.Hubs;
 using LinkedTracker.Data;
 using M6T.Core.TupleModelBinder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
@@ -48,8 +44,8 @@ public class Startup
             c.SwaggerDoc("v1", new OpenApiInfo  { Title = "My API", Version = "v1" });
         });
 
-        services.AddSingleton<IRoomRepository, RoomRepository>();
-        services.AddSingleton<IPointOfInterestRepository, PointOfInterestRepository>();
+        services.AddSingleton<RoomRepository>();
+        services.AddSingleton<PointOfInterestRepository>();
 
         services.AddSignalR();
     }
