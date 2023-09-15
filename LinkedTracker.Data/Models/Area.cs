@@ -5,13 +5,29 @@ namespace LinkedTracker.Data.Models;
 
 public class Area
 {
-    public Area(string name, int chestCount = 1)
+    public Area(string name)
     {
         Name = name;
-        Chests = Enumerable.Range(0, chestCount).Select(_ => new Chest()).ToList();
     }
-    
+
     public string Name { get; set; }
-    public List<Chest> Chests { get; set; }
+    public List<Chest> Chests { get; set; } = new() { new() };
+    public List<ItemType> RequiredItems { get; set; } = new();
+    public bool IsLocked(List<ItemType> items) => RequiredItems.All(items.Contains);
     public bool IsDone => Chests.All(c => c.IsDone);
+
+    public Area WithChests(int chestCount)
+    {
+        while (Chests.Count < chestCount)
+            Chests.Add(new());
+
+        return this;
+    }
+
+    public Area WithRequiredItems(params ItemType[] areas)
+    {
+        RequiredItems.AddRange(areas);
+
+        return this;
+    }
 }
