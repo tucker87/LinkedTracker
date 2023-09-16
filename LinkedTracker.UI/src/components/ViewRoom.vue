@@ -22,15 +22,14 @@
 
 
 <script setup>
-import { ref, onMounted, inject } from "vue"
+import { ref, onMounted, inject, toRefs } from "vue"
 import api from '../api'
 import gameMap from "@/components/GameMap.vue";
 import itemList from "@/components/ItemList.vue";
 const roomHub = inject('roomHub')
 
 const props = defineProps(['game', 'roomName'])
-const game = ref(props.game)
-const roomName = ref(props.roomName)
+const { game, roomName } = toRefs(props)
 
 const imgSrc = "/map2.png"
 let room = ref({})

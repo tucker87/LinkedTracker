@@ -49,7 +49,7 @@ public class RoomController(
     }
 
     [HttpPatch("[action]")]
-    public IResult SetPassword(SetPasswordRequest data)
+    public IResult SetPassword([FromBody]SetPasswordRequest data)
     {
         var (game, roomName, password) = data;
         var key = (game, roomName);
