@@ -10,6 +10,7 @@ export default {
        
         const connection = new HubConnectionBuilder()
             .withUrl(`${api.baseURL}/room-hub`)
+            .withAutomaticReconnect()
             .configureLogging(LogLevel.Information)
             .build()
 

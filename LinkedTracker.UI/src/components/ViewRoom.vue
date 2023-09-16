@@ -15,7 +15,7 @@
         <option value="Randomizer">Randomizer</option>
       </select>
     </div>
-    <game-map :points="pointsOfInterest" :img-src="imgSrc" :game="game" :roomName="roomName" @createPoint="createPoint"></game-map>
+    <game-map :points="pointsOfInterest" :="{imgSrc, game, roomName}" @createPoint="createPoint"></game-map>
   </div>
 </template>
 
@@ -24,6 +24,9 @@ import api from '../api'
 import gameMap from "@/components/GameMap.vue";
 
 export default {
+  components: {
+    gameMap
+  },
   props:['game', 'roomName'],
   data() {
     return {
@@ -37,17 +40,12 @@ export default {
     this.$roomHub.on('poi-type-changed', this.onPoiTypeChanged)
     this.$roomHub.on('poi-done-changed', this.onPoiDoneChanged)
   },
-  mounted() {
-    api.getRoom(this.game, this.roomName)
-      .then(response => {
-        this.room = response.room
-        this.pointsOfInterest = response.room.pointsOfInterest
-      })
+  async mounted() {
+    var response =  await api.getRoom(this.game, this.roomName)
+    this.room = response.room
+    this.pointsOfInterest = response.room.pointsOfInterest
     
     this.$roomHub.joinRoom(this.game, this.roomName)
-  },
-  components: {
-    gameMap
   },
   methods: {
     setPassword() {

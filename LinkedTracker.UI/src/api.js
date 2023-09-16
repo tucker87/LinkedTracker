@@ -5,21 +5,9 @@ axios.defaults.baseURL = baseUrl;
 
 export default {
     baseURL: baseUrl,
-    createRoom: game => 
-        axios.post(`/Room/Create?game=${game}`)
-            .then(r => r.data),
-
-    getRoom: (game, roomName) => 
-        axios.get(`/Room/${game}/${roomName}`)
-            .then(r => r.data),
-
-    getPOIs: (game, roomName) => 
-        axios.get(`/Room/GetPointsOfInterest/${game}/${roomName}`)
-            .then(r => r.data),
-    
-    setPOIs: request => 
-        axios.patch(`/Room/SetPoiType`, request),
-
-    setPassword: request =>
-        axios.patch(`/Room/SetPassword`, request)
+    createRoom: async game => (await axios.post(`/Room/Create?game=${game}`)).data,
+    getRoom: async (game, roomName) => (await axios.get(`/Room/${game}/${roomName}`)).data,
+    getPOIs: async (game, roomName) => (await axios.get(`/Room/GetPointsOfInterest/${game}/${roomName}`)).data,    
+    setPOIs: async request => await axios.patch(`/Room/SetPoiType`, request),
+    setPassword: async request => await axios.patch(`/Room/SetPassword`, request)
 }
