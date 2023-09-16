@@ -58,14 +58,12 @@ const setPointsOfInterest = async () => await api.setPOIs({
   poiType: room.value.pointOfInterestType
 })
 
-const getPointsOfInterest = async () => pointsOfInterest.value = await api.getPOIs(room.value.game, roomName.value)
-
-const createPoint = p => pointsOfInterest.push(p)
+const createPoint = p => pointsOfInterest.value.push(p)
 
 roomHub.on('poi-type-changed', async e => {
   room.value.pointOfInterestType = e.poiType
 
-  await getPointsOfInterest()
+  pointsOfInterest.value = await api.getPOIs(room.value.game, roomName.value)
 })
 roomHub.on('poi-done-changed', e => pointsOfInterest[e.poiIndex].isDone = e.isDone)
 
