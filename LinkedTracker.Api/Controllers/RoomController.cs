@@ -16,11 +16,13 @@ namespace LinkedTracker.Api.Controllers;
 public class RoomController(
     RoomRepository roomRepository,
     PointOfInterestRepository pointOfInterestRepository,
-    IHubContext<RoomHub, IRoomHub> roomHub) : Controller
+    IHubContext<RoomHub, IRoomHub> roomHub,
+    ItemRepository itemRepository) : Controller
 {
     private readonly RoomRepository _roomRepository = roomRepository;
     private readonly PointOfInterestRepository _pointOfInterestRepository = pointOfInterestRepository;
     private readonly IHubContext<RoomHub, IRoomHub> _roomHub = roomHub;
+    private readonly ItemRepository _itemRepository = itemRepository;
 
     [HttpGet("{game}/{roomName}")]
     public IActionResult ViewRoom(string game, string roomName)
@@ -66,6 +68,7 @@ public class RoomController(
         var room = _roomRepository.Get(key);
         room.PointOfInterestType = poiType;
         room.PointsOfInterest = _pointOfInterestRepository.Get((game, poiType)).ToList();
+        room.Items = _itemRepository.Get((game, poiType));
         _roomRepository.Update(key, room);
 
         await _roomHub.Clients.Group(game+roomName).PoiTypeChange(game, roomName, poiType);

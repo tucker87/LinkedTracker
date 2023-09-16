@@ -1,3 +1,3 @@
 namespace LinkedTracker.Data.Models;
 
-public record Item(ItemType Type);
+public record Item(ItemType Type, bool Collected = false);

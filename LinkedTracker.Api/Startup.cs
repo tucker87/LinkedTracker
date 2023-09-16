@@ -42,6 +42,7 @@ public class Startup(IConfiguration configuration)
 
         services.AddSingleton<RoomRepository>();
         services.AddSingleton<PointOfInterestRepository>();
+        services.AddSingleton<ItemRepository>();
 
         services.AddSignalR();
     }

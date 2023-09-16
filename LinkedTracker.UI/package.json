@@ -9,7 +9,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
   },
   "dependencies": {
-    "@x": "^6.0.7",
+    "@microsoft/signalr": "^7.0.11",
     "axios": "^0.27.2",
     "mitt": "^3.0.0",
     "vue": "^3.2.13",

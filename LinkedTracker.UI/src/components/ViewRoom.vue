@@ -15,71 +15,60 @@
         <option value="Randomizer">Randomizer</option>
       </select>
     </div>
-    <game-map :points="pointsOfInterest" :="{imgSrc, game, roomName}" @createPoint="createPoint"></game-map>
+    <game-map :points="pointsOfInterest" :="{ imgSrc, game, roomName }" @createPoint="createPoint"></game-map>
+    <item-list :="{ items }"></item-list>
   </div>
 </template>
 
-<script>
+
+<script setup>
+import { ref, onMounted, inject } from "vue"
 import api from '../api'
 import gameMap from "@/components/GameMap.vue";
+import itemList from "@/components/ItemList.vue";
+const roomHub = inject('roomHub')
 
-export default {
-  components: {
-    gameMap
-  },
-  props:['game', 'roomName'],
-  data() {
-    return {
-      imgSrc: "/map2.png",
-      room: {},
-      pointsOfInterest: []
-    }
-  },
-  created() {
-    console.log(import.meta.env)
-    this.$roomHub.on('poi-type-changed', this.onPoiTypeChanged)
-    this.$roomHub.on('poi-done-changed', this.onPoiDoneChanged)
-  },
-  async mounted() {
-    var response =  await api.getRoom(this.game, this.roomName)
-    this.room = response.room
-    this.pointsOfInterest = response.room.pointsOfInterest
-    
-    this.$roomHub.joinRoom(this.game, this.roomName)
-  },
-  methods: {
-    setPassword() {
-      api.setPassword({
-        game: this.room.game,
-        roomName: this.room.roomName,
-        password: this.room.password
-      })
-    },
-    async setPointsOfInterest() {
-      await api.setPOIs({
-        game: this.room.game,
-        roomName: this.room.roomName,
-        poiType: this.room.pointOfInterestType
-      })
-    },
-    async onPoiTypeChanged(e) {
-      this.room.pointOfInterestType = e.poiType
+const props = defineProps(['game', 'roomName'])
+const game = ref(props.game)
+const roomName = ref(props.roomName)
 
-      await this.getPointsOfInterest()
-    },
-    onPoiDoneChanged(e) {
-      this.pointsOfInterest[e.poiIndex].isDone = e.isDone
-    },
-    async getPointsOfInterest() {
-      var points = await api.getPOIs(this.room.game, this.roomName)
-      this.pointsOfInterest = points
-    },
-    createPoint(p) {
-      this.pointsOfInterest.push(p)
-    }
-  }
-};
+const imgSrc = "/map2.png"
+let room = ref({})
+let pointsOfInterest = ref([])
+let items = ref([])
+
+onMounted(async () => {
+  var response = await api.getRoom(game.value, roomName.value)
+  room.value = response.room
+  pointsOfInterest.value = response.room.pointsOfInterest
+  items = response.room.items
+
+  roomHub.joinRoom(game.value, roomName.value)
+})
+
+const setPassword = () => api.setPassword({
+  game: room.value.game,
+  roomName: room.value.roomName,
+  password: room.value.password
+})
+
+const setPointsOfInterest = async () => await api.setPOIs({
+  game: room.value.game,
+  roomName: room.value.roomName,
+  poiType: room.value.pointOfInterestType
+})
+
+const getPointsOfInterest = async () => pointsOfInterest.value = await api.getPOIs(room.value.game, roomName.value)
+
+const createPoint = p => pointsOfInterest.push(p)
+
+roomHub.on('poi-type-changed', async e => {
+  room.value.pointOfInterestType = e.poiType
+
+  await getPointsOfInterest()
+})
+roomHub.on('poi-done-changed', e => pointsOfInterest[e.poiIndex].isDone = e.isDone)
+
 </script>
 
-<style>
-</style>
+<style></style>
