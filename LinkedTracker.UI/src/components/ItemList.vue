@@ -1,10 +1,7 @@
 <template>
-    <div v-for="item in items">{{ item }}</div>
+    <div v-for="(item, i) in items" @click="$emit('toggleCollected', i)">{{ item }}</div>
 </template>
 
-
-<script>
-    export default {
-        props: ['items']
-    }
+<script setup>
+    const props = defineProps(['items'])
 </script>

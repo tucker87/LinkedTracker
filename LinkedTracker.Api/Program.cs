@@ -3,14 +3,16 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace LinkedTracker.Api;
 
-public class Program
-{
-    public static void Main(string[] args)
+using var host = new HostBuilder()
+    .ConfigureWebHost(webHostBuilder =>
     {
-        CreateWebHostBuilder(args).Build().Run();
-    }
+        webHostBuilder
+            .UseTestServer() // If using TestServer
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup()
+            .UseKestrel();
+    })
+    .Build();
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-        WebHost.CreateDefaultBuilder(args)
-            .UseStartup<Startup>();
-}
+await host.StartAsync();
+

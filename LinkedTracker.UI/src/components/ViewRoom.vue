@@ -16,7 +16,7 @@
       </select>
     </div>
     <game-map :points="pointsOfInterest" :="{ imgSrc, game, roomName }" @createPoint="createPoint"></game-map>
-    <item-list :="{ items }"></item-list>
+    <item-list :items="items" @toggleCollected="i => items[i].collected = !items[i].collected"></item-list>
   </div>
 </template>
 
@@ -32,15 +32,15 @@ const props = defineProps(['game', 'roomName'])
 const { game, roomName } = toRefs(props)
 
 const imgSrc = "/map2.png"
-let room = ref({})
-let pointsOfInterest = ref([])
-let items = ref([])
+const room = ref({})
+const pointsOfInterest = ref([])
+const items = ref([])
 
 onMounted(async () => {
   var response = await api.getRoom(game.value, roomName.value)
   room.value = response.room
   pointsOfInterest.value = response.room.pointsOfInterest
-  items = response.room.items
+  items.value = response.room.items
 
   roomHub.joinRoom(game.value, roomName.value)
 })
@@ -64,7 +64,7 @@ roomHub.on('poi-type-changed', async e => {
 
   pointsOfInterest.value = await api.getPOIs(room.value.game, roomName.value)
 })
-roomHub.on('poi-done-changed', e => pointsOfInterest[e.poiIndex].isDone = e.isDone)
+roomHub.on('poi-done-changed', e => pointsOfInterest.value[e.poiIndex].isDone = e.isDone)
 
 </script>
 
