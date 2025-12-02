@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: LinkedTracker.Api/Dockerfile
+    container_name: linkedtracker-api
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    networks:
+      - linkedtracker-network
+    restart: unless-stopped
+
+  ui:
+    build:
+      context: ./LinkedTracker.UI
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=http://localhost:5000
+    container_name: linkedtracker-ui
+    ports:
+      - "8080:80"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:5000
+    depends_on:
+      - api
+    networks:
+      - linkedtracker-network
+    restart: unless-stopped
+
+networks:
+  linkedtracker-network:
+    driver: bridge

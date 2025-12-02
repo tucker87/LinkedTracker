@@ -23,7 +23,7 @@ public class Startup(IConfiguration configuration)
             options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "https://linkedtrackerui.azurewebsites.net")
+                    builder.WithOrigins("http://localhost:3000", "http://localhost:8080", "https://linkedtrackerui.azurewebsites.net")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
