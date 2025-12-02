@@ -1,18 +1,16 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using LinkedTracker.Api;
+using Microsoft.AspNetCore.Builder;
 
-namespace LinkedTracker.Api;
+var builder = WebApplication.CreateBuilder(args);
 
-using var host = new HostBuilder()
-    .ConfigureWebHost(webHostBuilder =>
-    {
-        webHostBuilder
-            .UseTestServer() // If using TestServer
-            .UseContentRoot(Directory.GetCurrentDirectory())
-            .UseStartup()
-            .UseKestrel();
-    })
-    .Build();
+// Use the Startup class to configure services
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services);
 
-await host.StartAsync();
+var app = builder.Build();
+
+// Use the Startup class to configure the app
+startup.Configure(app, app.Environment);
+
+await app.RunAsync();
 
