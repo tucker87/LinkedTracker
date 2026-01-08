@@ -6,5 +6,5 @@ namespace LinkedTracker.Api.Controllers;
 [Route("poi")]
 public class PointOfInterestController(PointOfInterestRepository poiRepository) : Controller
 {
-    private readonly PointOfInterestRepository _poiRepository = poiRepository;
+   private readonly PointOfInterestRepository _poiRepository = poiRepository;
 }

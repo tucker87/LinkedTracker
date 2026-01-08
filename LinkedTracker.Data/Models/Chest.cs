@@ -2,5 +2,6 @@
 
 public class Chest
 {
-    public bool IsDone { get; set; }
+   public bool IsDone { get; set; }
 }
+

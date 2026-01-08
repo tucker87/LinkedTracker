@@ -14,72 +14,75 @@ namespace LinkedTracker.Api.Controllers;
 
 [Route("[controller]")]
 public class RoomController(
-    RoomRepository roomRepository,
-    PointOfInterestRepository pointOfInterestRepository,
-    IHubContext<RoomHub, IRoomHub> roomHub,
-    ItemRepository itemRepository) : Controller
+   RoomRepository roomRepository,
+   PointOfInterestRepository pointOfInterestRepository,
+   IHubContext<RoomHub, IRoomHub> roomHub,
+   ItemRepository itemRepository
+) : Controller
 {
-    private readonly RoomRepository _roomRepository = roomRepository;
-    private readonly PointOfInterestRepository _pointOfInterestRepository = pointOfInterestRepository;
-    private readonly IHubContext<RoomHub, IRoomHub> _roomHub = roomHub;
-    private readonly ItemRepository _itemRepository = itemRepository;
+   private readonly RoomRepository _roomRepository = roomRepository;
+   private readonly PointOfInterestRepository _pointOfInterestRepository =
+      pointOfInterestRepository;
+   private readonly IHubContext<RoomHub, IRoomHub> _roomHub = roomHub;
+   private readonly ItemRepository _itemRepository = itemRepository;
 
-    [HttpGet("{game}/{roomName}")]
-    public IActionResult ViewRoom(string game, string roomName)
-    {
-        var key = (game, roomName);
-        var room = _roomRepository.GetOrCreate(key, () => new Room(key));
+   [HttpGet("{game}/{roomName}")]
+   public IActionResult ViewRoom(string game, string roomName)
+   {
+      var key = (game, roomName);
+      var room = _roomRepository.GetOrCreate(key, () => new Room(key));
 
-        var viewModel = new RoomViewModel(room);
-        
-        return Json(viewModel);
-    }
+      var viewModel = new RoomViewModel(room);
 
-    [HttpPost("[action]")]
-    public IActionResult Create(string game)
-    {
-        var roomName = Utils.RandomString(5);
-        var data = (game, roomName);
-        var exists = _roomRepository.Exists(data);
-        if (exists)
-            return Json(new { created = false });
+      return Json(viewModel);
+   }
 
-        _roomRepository.Create(data, new Room(data));
-        return Json(new {data.game, data.roomName });
-    }
+   [HttpPost("[action]")]
+   public IActionResult Create(string game)
+   {
+      var roomName = Utils.RandomString(5);
+      var data = (game, roomName);
+      var exists = _roomRepository.Exists(data);
+      if (exists)
+         return Json(new { created = false });
 
-    [HttpPatch("[action]")]
-    public IResult SetPassword([FromBody]SetPasswordRequest data)
-    {
-        var (game, roomName, password) = data;
-        var key = (game, roomName);
-        var room = _roomRepository.Get(key);
-        room.Password = password;
-        _roomRepository.Update(key, room);
+      _roomRepository.Create(data, new Room(data));
+      return Json(new { data.game, data.roomName });
+   }
 
-        return Results.Ok();
-    }
+   [HttpPatch("[action]")]
+   public IResult SetPassword([FromBody] SetPasswordRequest data)
+   {
+      var (game, roomName, password) = data;
+      var key = (game, roomName);
+      var room = _roomRepository.Get(key);
+      room.Password = password;
+      _roomRepository.Update(key, room);
 
-    [HttpPatch("[action]")]
-    public async Task<IResult> SetPoiType((string game, string roomName, string poiType) data)
-    {
-        var (game, roomName, poiType) = data;
-        var key = (game, roomName);
-        var room = _roomRepository.Get(key);
-        room.PointOfInterestType = poiType;
-        room.PointsOfInterest = _pointOfInterestRepository.Get((game, poiType)).ToList();
-        room.Items = _itemRepository.Get((game, poiType));
-        _roomRepository.Update(key, room);
+      return Results.Ok();
+   }
 
-        await _roomHub.Clients.Group(game+roomName).PoiTypeChange(game, roomName, poiType);
+   [HttpPatch("[action]")]
+   public async Task<IResult> SetPoiType((string game, string roomName, string poiType) data)
+   {
+      var (game, roomName, poiType) = data;
+      var key = (game, roomName);
+      var room = _roomRepository.Get(key);
+      room.PointOfInterestType = poiType;
+      room.PointsOfInterest = _pointOfInterestRepository.Get((game, poiType)).ToList();
+      room.Items = _itemRepository.Get((game, poiType));
+      _roomRepository.Update(key, room);
 
-        return Results.Ok();
-    }
-    
-    [HttpGet("[action]/{game}/{roomName}")]
-    public IActionResult GetPointsOfInterest(string game, string roomName)
-    {
-        var room = _roomRepository.Get((game, roomName));
-        return Json(room.PointsOfInterest);
-    }
+      await _roomHub.Clients.Group(game + roomName).PoiTypeChange(game, roomName, poiType);
+
+      return Results.Ok();
+   }
+
+   [HttpGet("[action]/{game}/{roomName}")]
+   public IActionResult GetPointsOfInterest(string game, string roomName)
+   {
+      var room = _roomRepository.Get((game, roomName));
+      return Json(room.PointsOfInterest);
+   }
 }
+

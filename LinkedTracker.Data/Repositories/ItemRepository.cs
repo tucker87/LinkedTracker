@@ -4,26 +4,30 @@ using LinkedTracker.Data.Models;
 
 namespace LinkedTracker.Data.Repositories;
 
-public class ItemRepository 
+public class ItemRepository
 {
-    private Dictionary<(string, string), Func<List<Item>>> _itemGenerators;
+   private Dictionary<(string, string), Func<List<Item>>> _itemGenerators;
 
-    public ItemRepository()
-    {
-        _itemGenerators = new () {
-            [("lttp", "Randomizer")] = () => new List<Item> {
-                new(ItemType.Armor1),
-                new(ItemType.Armor2),
-                new(ItemType.Armor3),
-                new(ItemType.Hookshot),
-                new(ItemType.Boomerang1),
-                new(ItemType.Boomerang2)
-            }
-        };
-    }
+   public ItemRepository()
+   {
+      _itemGenerators = new()
+      {
+         [("lttp", "Randomizer")] = () =>
+            new List<Item>
+            {
+               new(ItemType.Armor1),
+               new(ItemType.Armor2),
+               new(ItemType.Armor3),
+               new(ItemType.Hookshot),
+               new(ItemType.Boomerang1),
+               new(ItemType.Boomerang2),
+            },
+      };
+   }
 
-    public List<Item> Get((string, string) key) 
-    {
-        return _itemGenerators[key]();
-    }
+   public List<Item> Get((string, string) key)
+   {
+      return _itemGenerators[key]();
+   }
 }
+

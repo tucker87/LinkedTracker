@@ -12,74 +12,82 @@ namespace LinkedTracker.Api;
 
 public class Startup(IConfiguration configuration)
 {
-    readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-    public IConfiguration Configuration { get; } = configuration;
+   readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+   public IConfiguration Configuration { get; } = configuration;
 
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddCors(options =>
-        {
-            options.AddPolicy(MyAllowSpecificOrigins,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:3000", "http://localhost:8080", "https://linkedtrackerui.azurewebsites.net")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials();
-                });
-        });
+   // This method gets called by the runtime. Use this method to add services to the container.
+   public void ConfigureServices(IServiceCollection services)
+   {
+      services.AddCors(options =>
+      {
+         options.AddPolicy(
+            MyAllowSpecificOrigins,
+            builder =>
+            {
+               builder
+                  .WithOrigins(
+                     "http://localhost:3000",
+                     "http://localhost:8080",
+                     "https://linkedtrackerui.azurewebsites.net"
+                  )
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+            }
+         );
+      });
 
-        services.AddControllers(options =>
-        {
-            options.ModelBinderProviders.Insert(0, new TupleModelBinderProvider());
-        });
-            
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo  { Title = "My API", Version = "v1" });
-        });
+      services.AddControllers(options =>
+      {
+         options.ModelBinderProviders.Insert(0, new TupleModelBinderProvider());
+      });
 
-        services.AddSingleton<RoomRepository>();
-        services.AddSingleton<PointOfInterestRepository>();
-        services.AddSingleton<ItemRepository>();
+      services.AddSwaggerGen(c =>
+      {
+         c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+      });
 
-        services.AddSignalR();
-    }
+      services.AddSingleton<RoomRepository>();
+      services.AddSingleton<PointOfInterestRepository>();
+      services.AddSingleton<ItemRepository>();
 
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
-        else
-        {
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
-        }
+      services.AddSignalR();
+   }
 
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
-        {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            c.RoutePrefix = string.Empty;
-        });
+   // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+   public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+   {
+      if (env.IsDevelopment())
+      {
+         app.UseDeveloperExceptionPage();
+      }
+      else
+      {
+         // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+         app.UseHsts();
+      }
 
-        app.UseCors(MyAllowSpecificOrigins); 
+      app.UseSwagger();
+      app.UseSwaggerUI(c =>
+      {
+         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+         c.RoutePrefix = string.Empty;
+      });
 
-        app.UseHttpsRedirection();
-        // app.UseMvc(routeBuilder => {
-        //     routeBuilder.EnableDependencyInjection();
-        //     routeBuilder.Expand().Select().Count().OrderBy().Filter();
-        // });
+      app.UseCors(MyAllowSpecificOrigins);
 
-        app.UseRouting();
+      app.UseHttpsRedirection();
+      // app.UseMvc(routeBuilder => {
+      //     routeBuilder.EnableDependencyInjection();
+      //     routeBuilder.Expand().Select().Count().OrderBy().Filter();
+      // });
 
-        app.UseEndpoints(endPoints => {
-            endPoints.MapHub<RoomHub>("/room-hub");
-            endPoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-        });
-    }
+      app.UseRouting();
+
+      app.UseEndpoints(endPoints =>
+      {
+         endPoints.MapHub<RoomHub>("/room-hub");
+         endPoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+      });
+   }
 }

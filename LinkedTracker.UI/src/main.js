@@ -4,7 +4,7 @@ import router from './router'
 import RoomHub from './room-hub'
 
 window.app = createApp({
-  render: () => h(App),
+   render: () => h(App),
 })
 
 window.app.use(router)
